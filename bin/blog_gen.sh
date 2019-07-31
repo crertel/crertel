@@ -8,11 +8,12 @@ BLOG_BUILD_PATH="$HOME/.blog_output"
 BLOG_URL="https://www.minor.gripe"
 BLOG_DESCRIPTION="Assorted writings on life, engineering, and software."
 BLOG_POSTS_ROOT="https://www.minor.gripe/posts/"
+BLOG_STYLES="$HOME/.blog/styles.css"
 
 PROD_HOSTNAME="minor.gripe"
 PROD_USER="crertel"
 PROD_BLOG_PATH="/home/crertel/blog"
-PROD_TEMP_ARTIFACT="`mktemp`.tar.gz"
+PROD_TEMP_ARTIFACT="$(mktemp).tar.gz"
 
 ZAMRAZAC_PATH="$HOME/projects/zamrazac"
 
@@ -28,7 +29,7 @@ popd () {
 }
 
 pushd "$ZAMRAZAC_PATH"
-BLOG_URL="$BLOG_URL" BLOG_DESCRIPTION="$BLOG_DESCRIPTION" BLOG_POSTS_ROOT="$BLOG_POSTS_ROOT" BLOG_TITLE="$BLOG_TITLE" BLOG_DIRECTORY="$BLOG_DIRECTORY" OUTPUT_DIRECTORY="$BLOG_BUILD_PATH" mix zamrazac.generate
+BLOG_STYLES="$BLOG_STYLES" BLOG_URL="$BLOG_URL" BLOG_DESCRIPTION="$BLOG_DESCRIPTION" BLOG_POSTS_ROOT="$BLOG_POSTS_ROOT" BLOG_TITLE="$BLOG_TITLE" BLOG_DIRECTORY="$BLOG_DIRECTORY" OUTPUT_DIRECTORY="$BLOG_BUILD_PATH" mix zamrazac.generate
 popd
 
 
