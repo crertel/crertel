@@ -3,9 +3,11 @@
 set -eou pipefail
 
 BLOG_AUTHOR="Chris Ertel"
-BLOG_DIRECTORY="$HOME/.blog"
-BLOG_BUILD_PATH="$HOME/.blog_output"
+BLOG_DIRECTORY="$HOME/writing/blog"
+BLOG_BUILD_PATH="$HOME/writing/_build/.blog_output"
 ZAMRAZAC_PATH="$HOME/projects/zamrazac"
+
+BLOG_TITLE="$@"
 
 mkdir -p "$BLOG_DIRECTORY"
 mkdir -p "$BLOG_BUILD_PATH"
@@ -19,5 +21,5 @@ popd () {
 }
 
 pushd "$ZAMRAZAC_PATH"
-BLOG_DIRECTORY="$BLOG_DIRECTORY" BLOG_AUTHOR="$BLOG_AUTHOR" mix zamrazac.create "$1"
+BLOG_DIRECTORY="$BLOG_DIRECTORY" BLOG_AUTHOR="$BLOG_AUTHOR" mix zamrazac.create "$BLOG_TITLE"
 popd
