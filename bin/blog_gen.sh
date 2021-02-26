@@ -9,7 +9,7 @@ BLOG_FILES_PATH="$HOME/writing/_build/.blog_files"
 BLOG_URL="https://www.minor.gripe"
 BLOG_DESCRIPTION="Assorted writings on life, engineering, and software."
 BLOG_POSTS_ROOT="https://www.minor.gripe/posts/"
-BLOG_STYLES="$HOME/.blog/styles.css"
+BLOG_STYLES="$HOME/writing/blog/styles.css"
 
 PROD_HOSTNAME="minor.gripe"
 PROD_USER="crertel"
