@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 set -eou pipefail
 
@@ -21,5 +21,7 @@ popd () {
 }
 
 pushd "$ZAMRAZAC_PATH"
-BLOG_DIRECTORY="$BLOG_DIRECTORY" BLOG_AUTHOR="$BLOG_AUTHOR" mix zamrazac.create "$BLOG_TITLE"
+BLOG_DIRECTORY="$BLOG_DIRECTORY" \
+BLOG_AUTHOR="$BLOG_AUTHOR" \
+mix zamrazac.create "$BLOG_TITLE" | grep -oP "^OUTPUT: \K.*$" | xargs "$EDITOR"
 popd
