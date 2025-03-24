@@ -2,26 +2,31 @@
 
 set -eou pipefail
 
-BLOG_AUTHOR="Chris Ertel"
-BLOG_DIRECTORY="$HOME/writing/blog"
-BLOG_BUILD_PATH="$HOME/writing/_build/.blog_output"
-ZAMRAZAC_PATH="$HOME/projects/zamrazac"
-
+# previews blog
+BLOG_DIRECTORY="/home/crertel/writing/newblog"
 BLOG_TITLE="$@"
 
-mkdir -p "$BLOG_DIRECTORY"
-mkdir -p "$BLOG_BUILD_PATH"
+# Get current date in YYYY-MM-DD format
+CURRENT_DATE=$(date +"%Y-%m-%d")
 
-pushd () {
-    command pushd "$@" > /dev/null
+# Slugify the title (lowercase, replace spaces with hyphens, remove special chars)
+SLUG=$(echo "$BLOG_TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g' | sed 's/[^a-z0-9_-]//g')
+
+# Combine date and slug
+BUNDLE_NAME="${CURRENT_DATE}-${SLUG}"
+
+# Path where the bundle will be created
+BUNDLE_PATH="content/posts/${BUNDLE_NAME}"
+
+{
+    cd "$BLOG_DIRECTORY"
+
+    # Create the page bundle
+    hugo new --kind page-bundle "posts/${BUNDLE_NAME}"
+
+    # Ensure the directory exists
+    mkdir -p "${BUNDLE_PATH}"
+
+    # Open the index.md file in your editor
+    $EDITOR "${BUNDLE_PATH}/index.md"
 }
-
-popd () {
-    command popd "" > /dev/null
-}
-
-pushd "$ZAMRAZAC_PATH"
-BLOG_DIRECTORY="$BLOG_DIRECTORY" \
-BLOG_AUTHOR="$BLOG_AUTHOR" \
-mix zamrazac.create "$BLOG_TITLE" | grep -oP "^OUTPUT: \K.*$" | xargs "$EDITOR"
-popd
