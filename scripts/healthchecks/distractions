@@ -2,12 +2,12 @@
 set +eou pipefail
 
 #dir="$(dirname "$(readlink -f "$0")")"
-SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"  # Get the directory name
-INCLUDE_DIR="$(readlink -f "${SCRIPT_DIR}/../../")"    # Resolve its full path if need be
+SCRIPT_DIR="$(dirname "${BASH_SOURCE[0]}")"         # Get the directory name
+INCLUDE_DIR="$(readlink -f "${SCRIPT_DIR}/../../")" # Resolve its full path if need be
 source "$INCLUDE_DIR/helpers.sh"
 
 print_info "Checking Distractions..."
-if [[ $(get_url_status "https://chat.distractions.wtf")  = "200" ]]; then
+if [[ $(get_url_status "https://chat.distractions.wtf") = "200" ]]; then
     print_success "okay!"
     printf "\n"
     exit 0
